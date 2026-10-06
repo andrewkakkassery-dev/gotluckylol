@@ -26,7 +26,7 @@
 
   <!-- The little icon on the browser tab (your clover). Keep favicon.png
        in the same folder as this file. -->
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="favicon.png?v=2" type="image/png">
 
   <!-- Loads the "Anton" font from Google (tall, heavy, condensed capitals).
        If it fails to load, the browser uses the backups in --display-font. -->
@@ -273,10 +273,13 @@
 
 <body>
   <!-- LOGO (top right). It links back to the top of the page. To change it,
-       replace logo.png with another image of the same name. -->
+       replace logo.png with another image of the same name.
+       The  ?v=2  on the end forces browsers to download the newest version
+       instead of showing an old cached copy. Whenever you replace the
+       logo or favicon, bump the number (?v=3, ?v=4 ...). -->
   <header class="top">
     <a class="logo" href="./" aria-label="gotluckylol, back to top">
-      <img src="logo.png" alt="gotluckylol clover logo" width="256" height="256">
+      <img src="logo.png?v=2" alt="gotluckylol clover logo" width="256" height="256">
     </a>
   </header>
 
