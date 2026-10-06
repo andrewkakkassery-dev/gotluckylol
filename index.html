@@ -1,272 +1,204 @@
 <!DOCTYPE html>
 <!--
-  YOUR BLOG - STARTER FILE
-  ------------------------
-  This one file is your whole website. You can open it by double-clicking it
-  (it opens in your browser). Edit it with any text editor, save, and refresh
-  the browser tab to see your changes.
+  GOTLUCKYLOL - POSTER LANDING PAGE
+  ---------------------------------
+  Files that go together (upload BOTH to GitHub):
+    index.html  -> this file (the page)
+    tigers.png  -> the tiger artwork (transparent background)
 
-  It has 3 parts:
-    1. <head>  -> settings for the page (title, how it fits on phones)
-    2. <style> -> the CSS: how everything LOOKS (colors, fonts, spacing)
-    3. <body>  -> the HTML: what the page SAYS (your name, your posts)
+  This file has 3 parts:
+    1. <head>  -> page settings (title, fonts, tab icon)
+    2. <style> -> CSS: how it LOOKS (colors, sizes, layout)
+    3. <body>  -> HTML: what it SAYS (the two phrases + the tigers)
 
-  Look for the words "EDIT ME" - those are the first things to change.
+  Search for "EDIT ME" to find the easy things to change.
 -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
-  <!-- Makes the page fit properly on phones. Leave this alone. -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- EDIT ME: this is the text shown on the browser tab and in Google results -->
-  <title>Your Blog Name</title>
-  <meta name="description" content="A short sentence about what your blog is about.">
+  <!-- EDIT ME: text on the browser tab and in Google results -->
+  <title>gotluckylol</title>
+  <meta name="description" content="As above, so below. gotluckylol.">
+
+  <!-- Colors the phone's browser bar to match your burgundy -->
+  <meta name="theme-color" content="#5a0808">
+
+  <!-- The little icon on the browser tab (uses your tiger artwork) -->
+  <link rel="icon" href="tigers.png" type="image/png">
+
+  <!-- Loads the "Anton" font from Google (tall, heavy, condensed capitals).
+       If it ever fails to load, the browser uses the backups listed in
+       --display-font below. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
-       1. YOUR LOOK - change these and the whole site changes.
-       A "variable" is a saved value. --text is the text color,
-       and the rest of the CSS reuses it. Change it once here and
-       it updates everywhere.
-       Colors are written as hex codes like #1a1a1a. Search
-       "color picker" on Google to find codes you like.
+       1. YOUR COLORS AND FONT
+       Change a value here and the whole page updates.
        ============================================================ */
     :root {
-      --background: #fafaf7;   /* page background */
-      --text: #1d1d1b;         /* main text color */
-      --muted: #6b6b66;        /* lighter text (dates, footer) */
-      --accent: #2456b8;       /* link color */
-      --line: #deded8;         /* thin divider lines */
+      --burgundy-light: #6e0e0c;  /* glow in the middle of the page */
+      --burgundy:       #5a0808;  /* main background */
+      --burgundy-dark:  #3d0404;  /* dark edges (the vignette) */
+      --tan:            #f3e3c6;  /* all the lettering */
 
-      /* Fonts. The list is a fallback chain: the browser uses the
-         first one your computer has. */
-      --body-font: Georgia, "Times New Roman", serif;
-      --heading-font: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-
-      --page-width: 40rem;     /* how wide the text column is */
-    }
-
-    /* Automatic dark mode for visitors whose device is set to dark.
-       It just swaps the colors above. Delete this block if you
-       don't want it. */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --background: #17171a;
-        --text: #ebebe6;
-        --muted: #9a9a94;
-        --accent: #8db0ff;
-        --line: #33333a;
-      }
+      --display-font: "Anton", Impact, "Haettenschweiler",
+                      "Arial Narrow Bold", sans-serif;
     }
 
     /* ============================================================
-       2. BASE STYLES - how the page behaves overall
+       2. BASE
        ============================================================ */
-    * {
-      box-sizing: border-box;  /* makes sizing math simpler. Leave it. */
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--burgundy);
     }
 
     body {
-      margin: 0;
-      background: var(--background);   /* var(--x) means "use variable x" */
-      color: var(--text);
-      font-family: var(--body-font);
-      font-size: 1.15rem;              /* 1rem = normal browser text size */
-      line-height: 1.7;                /* space between lines of text */
+      min-height: 100vh;
+      min-height: 100svh;            /* accounts for phone browser bars */
+      display: grid;
+      place-items: center;           /* centers the poster on the screen */
+      overflow-x: hidden;
+      color: var(--tan);
+      font-family: var(--display-font);
+
+      /* Burgundy that glows in the middle and darkens at the edges,
+         like your cream-on-burgundy banner */
+      background: radial-gradient(ellipse at center,
+                  var(--burgundy-light) 0%,
+                  var(--burgundy) 55%,
+                  var(--burgundy-dark) 100%);
+      background-attachment: fixed;
     }
 
-    /* The "wrapper" keeps everything in a readable centered column */
-    .wrapper {
-      max-width: var(--page-width);
-      margin: 0 auto;                  /* auto left/right = centered */
-      padding: 0 1.25rem;              /* breathing room on small screens */
+    /* Film-grain texture laid over everything. It is drawn by the
+       browser (no image file needed). Raise opacity for more grain,
+       or delete this whole block for none. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;          /* clicks pass through it */
+      opacity: 0.16;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 0.9  0 0 0 0 0.75  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     }
 
-    h1, h2, h3 {
-      font-family: var(--heading-font);
-      line-height: 1.25;
-    }
-
-    a {
-      color: var(--accent);
-    }
-
-    /* Shows a clear outline when someone navigates with the keyboard.
-       Good for accessibility. Leave it. */
-    a:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    /* ============================================================
-       3. SITE HEADER (top of the page)
-       ============================================================ */
-    .site-header {
-      padding: 3rem 0 2rem;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .site-title {
-      margin: 0;
-      font-size: 2.4rem;
-      letter-spacing: -0.02em;
-    }
-
-    .site-tagline {
-      margin: 0.5rem 0 0;
-      color: var(--muted);
-    }
-
-    .site-nav {
-      margin-top: 1.25rem;
-      font-family: var(--heading-font);
-      font-size: 1rem;
-    }
-
-    .site-nav a {
-      margin-right: 1.25rem;
+    /* Hidden text for screen readers (the big letters below are
+       decoration for them, so this says the phrase once, clearly). */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
     }
 
     /* ============================================================
-       4. POSTS
+       3. THE POSTER
+       On phones / tall screens: the phrases stack, tigers in the
+       middle (AS ABOVE on top, SO BELOW on the bottom).
+       On wide screens (see section 4): everything sits in one row,
+       like your banners.
        ============================================================ */
-    .post {
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--line);
+    .poster {
+      position: relative;            /* sits above the grain */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7vw;
+      width: 100%;
+      padding: 6vw 4vw 12vw;
+      animation: appear 900ms ease-out both;  /* one fade-in on load */
     }
 
-    .post h2 {
-      margin: 0 0 0.25rem;
-      font-size: 1.7rem;
+    .line {
+      font-size: min(24vw, 19vh);    /* biggest size that fits the screen */
+      line-height: 0.9;
+      letter-spacing: -0.005em;
+      text-transform: uppercase;     /* shows lowercase typing as CAPS */
+      white-space: nowrap;
+      text-align: center;
+
+      /* Stretches the letters TALLER, like your banners. 1.3 = 30%
+         taller. Set it to 1 for the font's normal proportions. */
+      transform: scaleY(1.3);
     }
 
-    .post-date {
+    .tigers {
       display: block;
-      margin-bottom: 1.25rem;
-      color: var(--muted);
-      font-family: var(--heading-font);
-      font-size: 0.95rem;
+      height: min(62vw, 34vh);
+      width: auto;
     }
 
-    /* About section */
-    .about {
-      padding: 2.5rem 0;
-    }
-
-    /* ============================================================
-       5. FOOTER
-       ============================================================ */
-    .site-footer {
-      padding: 2rem 0 3rem;
-      color: var(--muted);
-      font-family: var(--heading-font);
-      font-size: 0.9rem;
+    /* Small brand name at the bottom of the screen */
+    .brand {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 1.4rem;
+      margin: 0;
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--tan);
+      opacity: 0.7;
     }
 
     /* ============================================================
-       6. SMALL SCREENS - makes text a bit smaller on phones
+       4. WIDE SCREENS (laptops, desktops, landscape phones)
+       Switches to the one-row banner layout.
        ============================================================ */
-    @media (max-width: 600px) {
-      body { font-size: 1.05rem; }
-      .site-title { font-size: 1.9rem; }
+    @media (min-aspect-ratio: 5/4) {
+      .poster {
+        flex-direction: row;
+        gap: 3vw;
+        padding: 4vw 3vw 8vh;
+      }
+      .line   { font-size: min(8.2vw, 22vh); }
+      .tigers { height: min(26vw, 58vh); }
+    }
+
+    /* ============================================================
+       5. EXTRAS
+       ============================================================ */
+    @keyframes appear {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Skips the fade-in for people who've asked their device for
+       less motion. */
+    @media (prefers-reduced-motion: reduce) {
+      .poster { animation: none; }
     }
   </style>
 </head>
 
 <body>
-  <!-- ============================================================
-       HEADER - the top of your site
-       ============================================================ -->
-  <header class="site-header">
-    <div class="wrapper">
+  <!-- Screen readers read this once. Sighted visitors see the big
+       letters below instead. -->
+  <h1 class="sr-only">As above, so below</h1>
 
-      <!-- EDIT ME: your blog's name -->
-      <h1 class="site-title">Your Blog Name</h1>
+  <main class="poster">
+    <!-- EDIT ME: the left / top phrase (it is turned into CAPS for you) -->
+    <span class="line" aria-hidden="true">As above</span>
 
-      <!-- EDIT ME: one line about what you write about -->
-      <p class="site-tagline">Writing about the things I'm learning and thinking about.</p>
+    <!-- The tiger artwork. alt="" because it's decoration. -->
+    <img class="tigers" src="tigers.png" alt="" width="483" height="577">
 
-      <!-- Links that jump down the page to a section.
-           "#posts" matches id="posts" further down. -->
-      <nav class="site-nav" aria-label="Main">
-        <a href="#posts">Posts</a>
-        <a href="#about">About</a>
-      </nav>
-
-    </div>
-  </header>
-
-  <main class="wrapper">
-
-    <!-- ============================================================
-         POSTS
-         Each post is one <article> block, newest at the top.
-
-         HOW TO ADD A NEW POST:
-           1. Copy everything from <article ...> to </article>
-           2. Paste it right ABOVE the first post (below this comment)
-           3. Change the title, date, and text
-           4. Save, then refresh your browser
-
-         Tips:
-           - Each paragraph goes inside its own <p>...</p>
-           - The date in datetime="..." must be YEAR-MONTH-DAY.
-             The text between <time>...</time> is what people see.
-         ============================================================ -->
-    <section id="posts" aria-label="Posts">
-
-      <!-- POST 2 (newest) - EDIT ME or delete this whole block -->
-      <article class="post">
-        <h2>Your second post title</h2>
-        <time class="post-date" datetime="2026-10-12">October 12, 2026</time>
-        <p>
-          This is another sample post. Replace this text with your own
-          writing. Each paragraph lives inside its own paragraph tag, like
-          this one.
-        </p>
-        <p>
-          You can add a <a href="https://example.com">link</a> like this,
-          and <strong>bold</strong> or <em>italic</em> text like this.
-        </p>
-      </article>
-
-      <!-- POST 1 (oldest) - EDIT ME or delete this whole block -->
-      <article class="post">
-        <h2>Your first post title</h2>
-        <time class="post-date" datetime="2026-10-05">October 5, 2026</time>
-        <p>
-          Welcome to your blog. This is a sample post so you can see how
-          things look. Change the words, change the date, or delete this
-          whole block when you're ready to write your own.
-        </p>
-      </article>
-
-    </section>
-
-    <!-- ============================================================
-         ABOUT - a short intro about you
-         ============================================================ -->
-    <section id="about" class="about">
-      <h2>About</h2>
-      <!-- EDIT ME -->
-      <p>
-        Hi, I'm Your Name. Write two or three sentences about who you are
-        and why you write this blog.
-      </p>
-    </section>
-
+    <!-- EDIT ME: the right / bottom phrase -->
+    <span class="line" aria-hidden="true">So below</span>
   </main>
 
-  <!-- ============================================================
-       FOOTER - the bottom of the page
-       ============================================================ -->
-  <footer class="site-footer">
-    <div class="wrapper">
-      <!-- EDIT ME: replace with your name. &copy; is the copyright symbol. -->
-      <p>&copy; 2026 Your Name</p>
-    </div>
-  </footer>
+  <!-- EDIT ME: small name at the bottom -->
+  <p class="brand">gotluckylol</p>
 </body>
 </html>
