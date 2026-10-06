@@ -21,8 +21,8 @@
   <title>gotluckylol</title>
   <meta name="description" content="As above, so below. @gotluckylol">
 
-  <!-- Colors the phone's browser bar to match your burgundy -->
-  <meta name="theme-color" content="#5a0808">
+  <!-- Colors the phone's browser bar to match your background -->
+  <meta name="theme-color" content="#570008">
 
   <!-- The little icon on the browser tab (your clover). Keep favicon.png
        in the same folder as this file. -->
@@ -40,10 +40,8 @@
        Change a value here and the whole page updates.
        ============================================================ */
     :root {
-      --burgundy-light: #6e0e0c;  /* glow in the middle of the page */
-      --burgundy:       #5a0808;  /* main background */
-      --burgundy-dark:  #3d0404;  /* dark edges (the vignette) */
-      --tan:            #efcc9b;  /* all the lettering and icons (matches the gold on your clover) */
+      --background: #570008;      /* page background (the exact red you sent) */
+      --ink:        #d2cfca;      /* all the lettering and icons (soft off-white) */
 
       --display-font: "Anton", Impact, "Haettenschweiler",
                       "Arial Narrow Bold", sans-serif;
@@ -59,7 +57,7 @@
     * { box-sizing: border-box; }
 
     html {
-      background: var(--burgundy);
+      background: var(--background);
     }
 
     body {
@@ -69,27 +67,24 @@
       display: flex;
       flex-direction: column;        /* poster on top, social links below */
       overflow-x: hidden;
-      color: var(--tan);
+      color: var(--ink);
       font-family: var(--display-font);
-
-      /* Burgundy that glows in the middle and darkens at the edges */
-      background: radial-gradient(ellipse at center,
-                  var(--burgundy-light) 0%,
-                  var(--burgundy) 55%,
-                  var(--burgundy-dark) 100%);
-      background-attachment: fixed;
+      background: var(--background);   /* your red, as one flat color */
     }
 
-    /* Film-grain texture laid over everything (drawn by the browser, no
-       image file needed). Raise opacity for more grain, or delete this
-       whole block for none. */
+    /* Film-grain texture laid over the background (drawn by the browser,
+       no image file needed). It is blended in a way that keeps your red
+       averaging out to exactly #570008.
+       opacity = how strong the grain is: raise it for more texture,
+       lower it for less. Delete this whole block for none. */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;          /* clicks pass through it */
-      opacity: 0.16;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.94  0 0 0 0 0.8  0 0 0 0 0.61  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      mix-blend-mode: overlay;
+      opacity: 0.5;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 0 1'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     }
 
     /* Text that only screen readers see. */
@@ -105,7 +100,7 @@
        2b. TOP BAR (your clover logo, top right)
        ============================================================ */
     .top {
-      position: relative;            /* sits above the grain */
+      position: relative;
       display: flex;
       justify-content: flex-end;     /* pushes the logo to the RIGHT.
                                         Use flex-start for the left. */
@@ -125,7 +120,7 @@
     }
 
     .logo:focus-visible {            /* clear outline for keyboard users */
-      outline: 2px solid var(--tan);
+      outline: 2px solid var(--ink);
       outline-offset: 4px;
     }
 
@@ -136,7 +131,7 @@
        letters can be huge (see section 5).
        ============================================================ */
     .poster {
-      position: relative;            /* sits above the grain */
+      position: relative;
       flex: 1;                       /* fills the space above the links */
       display: flex;
       flex-direction: column;
@@ -177,7 +172,7 @@
        4. SOCIAL LINKS (bottom of the page)
        ============================================================ */
     .social {
-      position: relative;            /* sits above the grain */
+      position: relative;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -206,14 +201,14 @@
       place-items: center;
       width: 2.75rem;                /* big enough to tap with a thumb */
       height: 2.75rem;
-      color: var(--tan);
+      color: var(--ink);
       transition: opacity 150ms ease;
     }
 
     .links a:hover { opacity: 0.7; }   /* slight dim when hovered */
 
     .links a:focus-visible {         /* clear outline for keyboard users */
-      outline: 2px solid var(--tan);
+      outline: 2px solid var(--ink);
       outline-offset: 2px;
       border-radius: 4px;
       opacity: 1;
@@ -222,7 +217,7 @@
     .links svg {
       width: 1.65rem;                /* icon size. Make bigger or smaller */
       height: 1.65rem;
-      fill: currentColor;            /* icons use the --tan color */
+      fill: currentColor;            /* icons use the --ink color */
     }
 
     /* The FOMO logo is wider than it is tall, so it gets a bit more width
