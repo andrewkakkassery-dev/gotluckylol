@@ -103,14 +103,14 @@
     }
 
     /* ============================================================
-       2b. TOP BAR (your clover logo, top right)
+       2b. TOP BAR (your clover logo, top center)
        ============================================================ */
     .top {
       position: relative;
       display: flex;
-      justify-content: flex-end;     /* pushes the logo to the RIGHT.
-                                        Use flex-start for the left. */
-      padding: 1rem 1.25rem 0;
+      justify-content: center;       /* centers the logo. Use flex-end for the
+                                        right or flex-start for the left. */
+      padding: 1rem 1.25rem 0;       /* 1rem = how far it sits from the top */
     }
 
     .logo {
@@ -255,6 +255,7 @@
        Switches to one word per line so the lettering fills the screen.
        ============================================================ */
     @media (max-aspect-ratio: 5/4) {
+      .top    { padding-top: 2.25rem; }   /* logo sits a bit lower on phones */
       .poster { padding-top: 4vh; }
       .phrase {
         flex-direction: column;      /* words stacked top to bottom */
@@ -281,7 +282,7 @@
 </head>
 
 <body>
-  <!-- LOGO (top right). It links back to the top of the page. To change it,
+  <!-- LOGO (top center). It links back to the top of the page. To change it,
        replace logo.png with another image of the same name.
        The  ?v=2  on the end forces browsers to download the newest version
        instead of showing an old cached copy. Whenever you replace the
@@ -379,7 +380,7 @@
 
       var spin = new Image();
       spin.onload = function () { logo.src = spin.src; };
-      spin.src = 'logo-spin.webp?v=1';   // bump v=1 to v=2 if you replace the file
+      spin.src = 'logo-spin.webp?v=2';   // bump v=2 to v=3 if you replace the file
     })();
   </script>
 </body>
