@@ -285,7 +285,12 @@
        replace logo.png with another image of the same name.
        The  ?v=2  on the end forces browsers to download the newest version
        instead of showing an old cached copy. Whenever you replace the
-       logo or favicon, bump the number (?v=3, ?v=4 ...). -->
+       logo or favicon, bump the number (?v=3, ?v=4 ...).
+
+       This still image shows first. The little script at the bottom of
+       the page then swaps in the spinning version (logo-spin.webp) as soon
+       as it has loaded. If the spinning file can't load, or someone has
+       "reduce motion" turned on, they just keep seeing this still logo. -->
   <header class="top">
     <a class="logo" href="./" aria-label="gotluckylol, back to top">
       <img src="logo.png?v=2" alt="gotluckylol clover logo" width="256" height="256">
@@ -362,5 +367,20 @@
       </li>
     </ul>
   </footer>
+
+  <!-- Swaps the still logo for the spinning one once it has finished
+       loading. To go back to the still logo, delete this whole script. -->
+  <script>
+    (function () {
+      var logo = document.querySelector('.logo img');
+      var reduceMotion = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!logo || reduceMotion) return;
+
+      var spin = new Image();
+      spin.onload = function () { logo.src = spin.src; };
+      spin.src = 'logo-spin.webp?v=1';   // bump v=1 to v=2 if you replace the file
+    })();
+  </script>
 </body>
 </html>
