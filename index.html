@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!--
+  YOUR BLOG - STARTER FILE
+  ------------------------
+  This one file is your whole website. You can open it by double-clicking it
+  (it opens in your browser). Edit it with any text editor, save, and refresh
+  the browser tab to see your changes.
+
+  It has 3 parts:
+    1. <head>  -> settings for the page (title, how it fits on phones)
+    2. <style> -> the CSS: how everything LOOKS (colors, fonts, spacing)
+    3. <body>  -> the HTML: what the page SAYS (your name, your posts)
+
+  Look for the words "EDIT ME" - those are the first things to change.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Makes the page fit properly on phones. Leave this alone. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- EDIT ME: this is the text shown on the browser tab and in Google results -->
+  <title>Your Blog Name</title>
+  <meta name="description" content="A short sentence about what your blog is about.">
+
+  <style>
+    /* ============================================================
+       1. YOUR LOOK - change these and the whole site changes.
+       A "variable" is a saved value. --text is the text color,
+       and the rest of the CSS reuses it. Change it once here and
+       it updates everywhere.
+       Colors are written as hex codes like #1a1a1a. Search
+       "color picker" on Google to find codes you like.
+       ============================================================ */
+    :root {
+      --background: #fafaf7;   /* page background */
+      --text: #1d1d1b;         /* main text color */
+      --muted: #6b6b66;        /* lighter text (dates, footer) */
+      --accent: #2456b8;       /* link color */
+      --line: #deded8;         /* thin divider lines */
+
+      /* Fonts. The list is a fallback chain: the browser uses the
+         first one your computer has. */
+      --body-font: Georgia, "Times New Roman", serif;
+      --heading-font: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+      --page-width: 40rem;     /* how wide the text column is */
+    }
+
+    /* Automatic dark mode for visitors whose device is set to dark.
+       It just swaps the colors above. Delete this block if you
+       don't want it. */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #17171a;
+        --text: #ebebe6;
+        --muted: #9a9a94;
+        --accent: #8db0ff;
+        --line: #33333a;
+      }
+    }
+
+    /* ============================================================
+       2. BASE STYLES - how the page behaves overall
+       ============================================================ */
+    * {
+      box-sizing: border-box;  /* makes sizing math simpler. Leave it. */
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);   /* var(--x) means "use variable x" */
+      color: var(--text);
+      font-family: var(--body-font);
+      font-size: 1.15rem;              /* 1rem = normal browser text size */
+      line-height: 1.7;                /* space between lines of text */
+    }
+
+    /* The "wrapper" keeps everything in a readable centered column */
+    .wrapper {
+      max-width: var(--page-width);
+      margin: 0 auto;                  /* auto left/right = centered */
+      padding: 0 1.25rem;              /* breathing room on small screens */
+    }
+
+    h1, h2, h3 {
+      font-family: var(--heading-font);
+      line-height: 1.25;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    /* Shows a clear outline when someone navigates with the keyboard.
+       Good for accessibility. Leave it. */
+    a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* ============================================================
+       3. SITE HEADER (top of the page)
+       ============================================================ */
+    .site-header {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .site-title {
+      margin: 0;
+      font-size: 2.4rem;
+      letter-spacing: -0.02em;
+    }
+
+    .site-tagline {
+      margin: 0.5rem 0 0;
+      color: var(--muted);
+    }
+
+    .site-nav {
+      margin-top: 1.25rem;
+      font-family: var(--heading-font);
+      font-size: 1rem;
+    }
+
+    .site-nav a {
+      margin-right: 1.25rem;
+    }
+
+    /* ============================================================
+       4. POSTS
+       ============================================================ */
+    .post {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .post h2 {
+      margin: 0 0 0.25rem;
+      font-size: 1.7rem;
+    }
+
+    .post-date {
+      display: block;
+      margin-bottom: 1.25rem;
+      color: var(--muted);
+      font-family: var(--heading-font);
+      font-size: 0.95rem;
+    }
+
+    /* About section */
+    .about {
+      padding: 2.5rem 0;
+    }
+
+    /* ============================================================
+       5. FOOTER
+       ============================================================ */
+    .site-footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-family: var(--heading-font);
+      font-size: 0.9rem;
+    }
+
+    /* ============================================================
+       6. SMALL SCREENS - makes text a bit smaller on phones
+       ============================================================ */
+    @media (max-width: 600px) {
+      body { font-size: 1.05rem; }
+      .site-title { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ============================================================
+       HEADER - the top of your site
+       ============================================================ -->
+  <header class="site-header">
+    <div class="wrapper">
+
+      <!-- EDIT ME: your blog's name -->
+      <h1 class="site-title">Your Blog Name</h1>
+
+      <!-- EDIT ME: one line about what you write about -->
+      <p class="site-tagline">Writing about the things I'm learning and thinking about.</p>
+
+      <!-- Links that jump down the page to a section.
+           "#posts" matches id="posts" further down. -->
+      <nav class="site-nav" aria-label="Main">
+        <a href="#posts">Posts</a>
+        <a href="#about">About</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="wrapper">
+
+    <!-- ============================================================
+         POSTS
+         Each post is one <article> block, newest at the top.
+
+         HOW TO ADD A NEW POST:
+           1. Copy everything from <article ...> to </article>
+           2. Paste it right ABOVE the first post (below this comment)
+           3. Change the title, date, and text
+           4. Save, then refresh your browser
+
+         Tips:
+           - Each paragraph goes inside its own <p>...</p>
+           - The date in datetime="..." must be YEAR-MONTH-DAY.
+             The text between <time>...</time> is what people see.
+         ============================================================ -->
+    <section id="posts" aria-label="Posts">
+
+      <!-- POST 2 (newest) - EDIT ME or delete this whole block -->
+      <article class="post">
+        <h2>Your second post title</h2>
+        <time class="post-date" datetime="2026-10-12">October 12, 2026</time>
+        <p>
+          This is another sample post. Replace this text with your own
+          writing. Each paragraph lives inside its own paragraph tag, like
+          this one.
+        </p>
+        <p>
+          You can add a <a href="https://example.com">link</a> like this,
+          and <strong>bold</strong> or <em>italic</em> text like this.
+        </p>
+      </article>
+
+      <!-- POST 1 (oldest) - EDIT ME or delete this whole block -->
+      <article class="post">
+        <h2>Your first post title</h2>
+        <time class="post-date" datetime="2026-10-05">October 5, 2026</time>
+        <p>
+          Welcome to your blog. This is a sample post so you can see how
+          things look. Change the words, change the date, or delete this
+          whole block when you're ready to write your own.
+        </p>
+      </article>
+
+    </section>
+
+    <!-- ============================================================
+         ABOUT - a short intro about you
+         ============================================================ -->
+    <section id="about" class="about">
+      <h2>About</h2>
+      <!-- EDIT ME -->
+      <p>
+        Hi, I'm Your Name. Write two or three sentences about who you are
+        and why you write this blog.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER - the bottom of the page
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="wrapper">
+      <!-- EDIT ME: replace with your name. &copy; is the copyright symbol. -->
+      <p>&copy; 2026 Your Name</p>
+    </div>
+  </footer>
+</body>
+</html>
