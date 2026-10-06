@@ -33,11 +33,12 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
   <meta name="apple-mobile-web-app-title" content="gotluckylol">
 
-  <!-- Loads the "Anton" font from Google (tall, heavy, condensed capitals).
-       If it fails to load, the browser uses the backups in --display-font. -->
+  <!-- Loads the "Inter" font from Google: ExtraBold (800) for the big
+       quote and Medium (500) for the small text at the bottom.
+       If it fails to load, the browser uses the backups in --font. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;800&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
@@ -48,12 +49,12 @@
       --background: #570008;      /* page background (the exact red you sent) */
       --ink:        #d2cfca;      /* all the lettering and icons (soft off-white) */
 
-      --display-font: "Anton", Impact, "Haettenschweiler",
-                      "Arial Narrow Bold", sans-serif;
+      --font: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
       /* How much taller the big letters are stretched.
-         1 = the font's normal shape, 1.3 = 30% taller. */
-      --stretch: 1.3;
+         1 = the font's normal shape (matches your poster).
+         Try 1.3 for taller, stretched letters. */
+      --stretch: 1;
     }
 
     /* ============================================================
@@ -73,7 +74,7 @@
       flex-direction: column;        /* poster on top, social links below */
       overflow-x: hidden;
       color: var(--ink);
-      font-family: var(--display-font);
+      font-family: var(--font);
       background: var(--background);   /* your red, as one flat color */
     }
 
@@ -156,15 +157,17 @@
       display: flex;
       flex-direction: row;           /* words side by side */
       justify-content: flex-start;
-      column-gap: 0.22em;            /* the space between words */
-      font-size: min(21vw, 26vh);    /* biggest size that fits the screen */
-      line-height: 0.9;
-      text-transform: uppercase;     /* shows lowercase typing as CAPS */
+      column-gap: 0.2em;             /* the space between words */
+      font-size: min(19vw, 30vh);    /* biggest size that fits the screen */
+      font-weight: 800;              /* ExtraBold, like your poster headline */
+      letter-spacing: -0.05em;       /* tight letter spacing, like your poster. More negative = tighter */
+      line-height: 0.88;             /* tight space between lines */
+      text-transform: none;          /* shows the words exactly as typed */
       white-space: nowrap;
     }
 
     .phrase + .phrase {
-      margin-top: 0.04em;            /* small gap between the two phrases */
+      margin-top: 0;                 /* no extra gap between the two phrases */
     }
 
     .word {
@@ -189,9 +192,10 @@
 
     .handle {
       margin: 0;
-      font-size: 1.6rem;
-      line-height: 1;
-      letter-spacing: 0.01em;
+      font-size: 1.15rem;
+      font-weight: 500;              /* Medium, like the line on your poster */
+      line-height: 1.2;
+      letter-spacing: -0.01em;
     }
 
     .links {
@@ -256,7 +260,7 @@
         flex-direction: column;      /* words stacked top to bottom */
         align-items: flex-start;     /* words lined up on the left */
         row-gap: 0;
-        font-size: min(36vw, 14vh);
+        font-size: min(32vw, 17vh);
       }
     }
 
@@ -293,15 +297,16 @@
   <h1 class="sr-only">As above, so below</h1>
 
   <main class="poster" aria-hidden="true">
-    <!-- EDIT ME: the two phrases. Each word is its own <span>. Typing in
-         lowercase is fine, the page turns it into CAPS. -->
+    <!-- EDIT ME: the two phrases. Each word is its own <span>. The words
+         show exactly as you type them. To switch to ALL CAPS, find
+         text-transform in the CSS and change  none  to  uppercase. -->
     <div class="quote">
       <div class="phrase">
-        <span class="word">As</span>
+        <span class="word">as</span>
         <span class="word">above</span>
       </div>
       <div class="phrase">
-        <span class="word">So</span>
+        <span class="word">so</span>
         <span class="word">below</span>
       </div>
     </div>
@@ -318,7 +323,7 @@
        target="_blank" opens the link in a new tab.
        ============================================================ -->
   <footer class="social">
-    <p class="handle">@gotluckylol</p>
+    <p class="handle">@gotluckylol coming soon</p>
 
     <ul class="links">
       <!-- X (Twitter) -->
