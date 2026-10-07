@@ -64,6 +64,8 @@
 
     html {
       background: var(--background);
+      -webkit-text-size-adjust: 100%;   /* stops iPhones resizing the text */
+      text-size-adjust: 100%;
     }
 
     body {
@@ -281,12 +283,15 @@
        ============================================================ */
     @media (max-aspect-ratio: 5/4) {
       .top    { padding-top: 2.25rem; }   /* logo sits a bit lower on phones */
+      .comma  { width: auto; }            /* on phones the comma takes real space,
+                                             so the text block centers with it */
       .poster { padding-top: 4vh; }
       .phrase {
         flex-direction: column;      /* words stacked top to bottom */
         align-items: flex-start;     /* words lined up on the left */
         row-gap: 0;
-        font-size: min(32vw, 17vh);
+        font-size: min(30vw, 17vh);      /* a little smaller so the comma fits */
+        font-size: min(30vw, 17svh);     /* svh = the visible screen height on iPhones */
       }
     }
 
