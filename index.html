@@ -114,6 +114,7 @@
     }
 
     .logo {
+      position: relative;            /* lets the spinning video sit on top */
       display: inline-block;
       line-height: 0;
       border-radius: 0.5rem;
@@ -124,6 +125,20 @@
       height: clamp(3.25rem, 5vw, 4.75rem);   /* logo size. Change to taste */
       width: auto;
     }
+
+    /* The spinning version (a transparent video, used by Chrome, Edge and
+       Android). It lies exactly on top of the still logo and fades in once
+       it is playing. */
+    .logo-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .logo-video.on { opacity: 1; }
 
     .logo:focus-visible {            /* clear outline for keyboard users */
       outline: 2px solid var(--ink);
@@ -289,9 +304,11 @@
        logo or favicon, bump the number (?v=3, ?v=4 ...).
 
        This still image shows first. The little script at the bottom of
-       the page then swaps in the spinning version (logo-spin.webp) as soon
-       as it has loaded. If the spinning file can't load, or someone has
-       "reduce motion" turned on, they just keep seeing this still logo. -->
+       the page then swaps in the spinning version as soon as it has loaded:
+         - logo-spin.webm: a transparent 60 fps video (Chrome, Edge, Android)
+         - logo-spin.webp: a 60 fps animated image (Safari, iPhone, Firefox)
+       If the spinning file can't load, or someone has "reduce motion" turned
+       on, they just keep seeing this still logo. -->
   <header class="top">
     <a class="logo" href="./" aria-label="gotluckylol, back to top">
       <img src="logo.png?v=2" alt="gotluckylol clover logo" width="256" height="256">
@@ -369,18 +386,50 @@
     </ul>
   </footer>
 
-  <!-- Swaps the still logo for the spinning one once it has finished
-       loading. To go back to the still logo, delete this whole script. -->
+  <!-- Swaps the still logo for the spinning one once it has loaded.
+       To go back to the still logo, delete this whole script. -->
   <script>
     (function () {
       var logo = document.querySelector('.logo img');
       var reduceMotion = window.matchMedia &&
         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!logo || reduceMotion) return;
+      if (!logo || reduceMotion) return;      // keep the still logo
 
-      var spin = new Image();
-      spin.onload = function () { logo.src = spin.src; };
-      spin.src = 'logo-spin.webp?v=2';   // bump v=2 to v=3 if you replace the file
+      // Chrome, Edge, Brave and Android browsers play the transparent video
+      // (the smoothest option). Safari, iPhone and Firefox get the animated
+      // image instead.
+      var ua = navigator.userAgent;
+      var useVideo = /Chrome\/|Edg\//.test(ua) &&
+                     !/CriOS|FxiOS|iPhone|iPad|iPod/.test(ua);
+
+      function useImage() {
+        var spin = new Image();
+        spin.onload = function () { logo.src = spin.src; };
+        spin.src = 'logo-spin.webp?v=3';      // bump v=3 to v=4 if you replace the file
+      }
+
+      if (!useVideo) { useImage(); return; }
+
+      var video = document.createElement('video');
+      video.className = 'logo-video';
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('aria-hidden', 'true');
+      video.onerror = function () { video.remove(); useImage(); };
+      video.onplaying = function () {
+        video.classList.add('on');
+        logo.style.visibility = 'hidden';     // keeps the space, hides the still logo
+      };
+      video.src = 'logo-spin.webm?v=3';       // bump v=3 to v=4 if you replace the file
+      logo.parentNode.appendChild(video);
+      var started = video.play();
+      if (started && started.catch) {
+        started.catch(function () { video.remove(); useImage(); });
+      }
     })();
   </script>
 </body>
