@@ -185,6 +185,16 @@
       margin-top: 0;                 /* no extra gap between the two phrases */
     }
 
+    /* The comma after "above" takes up no space of its own, so it never
+       pushes any of the words out of place. It just hangs off the end of
+       the word. To remove the comma, delete  <span class="comma">,</span>
+       in the HTML. */
+    .comma {
+      display: inline-block;
+      width: 0;
+      overflow: visible;
+    }
+
     .word {
       display: block;
       transform: scaleY(var(--stretch));   /* makes the letters taller */
@@ -326,7 +336,7 @@
     <div class="quote">
       <div class="phrase">
         <span class="word">as</span>
-        <span class="word">above</span>
+        <span class="word">above<span class="comma">,</span></span>
       </div>
       <div class="phrase">
         <span class="word">so</span>
